@@ -10,13 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WelcomeRouteImport } from './routes/welcome'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as PickCityRouteImport } from './routes/pick-city'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as FavoritesRouteImport } from './routes/favorites'
+import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 
 const WelcomeRoute = WelcomeRouteImport.update({
   id: '/welcome',
   path: '/welcome',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PickCityRoute = PickCityRouteImport.update({
@@ -29,6 +37,16 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FavoritesRoute = FavoritesRouteImport.update({
+  id: '/favorites',
+  path: '/favorites',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,35 +55,69 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
+  '/favorites': typeof FavoritesRoute
   '/login': typeof LoginRoute
   '/pick-city': typeof PickCityRoute
+  '/search': typeof SearchRoute
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
+  '/favorites': typeof FavoritesRoute
   '/login': typeof LoginRoute
   '/pick-city': typeof PickCityRoute
+  '/search': typeof SearchRoute
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
+  '/favorites': typeof FavoritesRoute
   '/login': typeof LoginRoute
   '/pick-city': typeof PickCityRoute
+  '/search': typeof SearchRoute
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/pick-city' | '/welcome'
+  fullPaths:
+    | '/'
+    | '/account'
+    | '/favorites'
+    | '/login'
+    | '/pick-city'
+    | '/search'
+    | '/welcome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/pick-city' | '/welcome'
-  id: '__root__' | '/' | '/login' | '/pick-city' | '/welcome'
+  to:
+    | '/'
+    | '/account'
+    | '/favorites'
+    | '/login'
+    | '/pick-city'
+    | '/search'
+    | '/welcome'
+  id:
+    | '__root__'
+    | '/'
+    | '/account'
+    | '/favorites'
+    | '/login'
+    | '/pick-city'
+    | '/search'
+    | '/welcome'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccountRoute: typeof AccountRoute
+  FavoritesRoute: typeof FavoritesRoute
   LoginRoute: typeof LoginRoute
   PickCityRoute: typeof PickCityRoute
+  SearchRoute: typeof SearchRoute
   WelcomeRoute: typeof WelcomeRoute
 }
 
@@ -76,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/welcome'
       fullPath: '/welcome'
       preLoaderRoute: typeof WelcomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pick-city': {
@@ -92,6 +151,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/favorites': {
+      id: '/favorites'
+      path: '/favorites'
+      fullPath: '/favorites'
+      preLoaderRoute: typeof FavoritesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,8 +177,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccountRoute: AccountRoute,
+  FavoritesRoute: FavoritesRoute,
   LoginRoute: LoginRoute,
   PickCityRoute: PickCityRoute,
+  SearchRoute: SearchRoute,
   WelcomeRoute: WelcomeRoute,
 }
 export const routeTree = rootRouteImport
