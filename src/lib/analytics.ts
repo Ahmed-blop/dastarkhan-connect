@@ -9,8 +9,8 @@ export async function logEvent(
   try {
     await supabase.rpc("log_event", {
       _event_type: eventType,
-      _establishment_id: establishmentId ?? undefined,
-      _metadata: (metadata ?? undefined) as Json | undefined,
+      _establishment_id: (establishmentId ?? null) as unknown as string,
+      _metadata: (metadata ?? null) as unknown as Json,
     });
   } catch (e) {
     console.warn("logEvent failed", e);
