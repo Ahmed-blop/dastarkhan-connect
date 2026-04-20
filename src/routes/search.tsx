@@ -57,7 +57,7 @@ function SearchPage() {
   useEffect(() => { setQ(params.q ?? ""); }, [params.q]);
 
   const update = (next: Partial<SearchParams>) => {
-    navigate({ search: (prev) => ({ ...prev, ...next }) as never, replace: true });
+    navigate({ search: (prev: SearchParams) => ({ ...prev, ...next }) as never, replace: true });
   };
 
   useEffect(() => {
